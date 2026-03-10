@@ -1,83 +1,274 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robo">
-
-  <!-- Base Link -->
   <link name="base_link">
-
-    <!-- Visual -->
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robo_description/meshes/base_link.stl"
-              scale="0.05 0.05 0.05"/>
+        <mesh filename="package://robo_description/meshes/base(1).stl" scale="0.01 0.01 0.01"/>
       </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
     </visual>
-
-    <!-- Collision -->
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robo_description/meshes/base_link.stl"
-              scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robo_description/meshes/base(1).stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
-
-    <!-- Inertial -->
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="1.0"/>
-      <inertia
-        ixx="0.01" ixy="0.0" ixz="0.0"
-        iyy="0.01" iyz="0.0"
-        izz="0.01"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
     </inertial>
   </link>
 
-  <!-- Joint 1 -->
   <joint name="joint_1" type="revolute">
     <parent link="base_link"/>
-    <child link="connector_1"/>
+    <child link="link_1"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit
-      lower="-1.57"
-      upper="1.57"
-      effort="10.0"
-      velocity="1.0"/>
+    <limit lower="-1.57" upper="1.57" effort="10.0" velocity="1.0"/>
   </joint>
 
-  <!-- Link 1 -->
-  <link name="connector_1">
-
-    <!-- Visual -->
+  <link name="link_1">
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.30  " rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robo_description/meshes/connector_1.stl"
-              scale="0.05 0.05 0.05"/>
+        <mesh filename="package://robo_description/meshes/003.stl" scale="0.01 0.01 0.01"/>
       </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
     </visual>
-
-    <!-- Collision -->
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robo_description/meshes/connector_1.stl"
-              scale="0.001 0.001 0.001"/>
+        <mesh filename="package://robo_description/meshes/003.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
-
-    <!-- Inertial (dummy) -->
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="0.5"/>
-      <inertia
-        ixx="0.005" ixy="0.0" ixz="0.0"
-        iyy="0.005" iyz="0.0"
-        izz="0.005"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
     </inertial>
+  </link>
+  
+  <joint name="joint_1_1" type="fixed">
+    <parent link="link_1"/>
+    <child link="link_1_1"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.61" upper="2.61" effort="10.0" velocity="1.0"/>
+  </joint>
 
+  <link name="link_1_1">
+    <visual>
+      <origin xyz="0 0 1.1" rpy="-1.57 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/004.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/004.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+    </inertial>
   </link>
 
+  <joint name="joint_2" type="revolute">
+    <parent link="link_1"/>
+    <child link="link_2"/>
+     <origin xyz="0 0 .75" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.61" upper="2.61" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <link name="link_2">
+    <visual>
+      <origin xyz="-.84 0 0" rpy="3.14 0 -1.57"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/006.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/006.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_2_1" type="fixed">
+    <parent link="link_2"/>
+    <child link="link_2_1"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.61" upper="2.61" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <link name="link_2_1">
+    <visual>
+      <origin xyz="-1.17 0 -0.02" rpy="3.14 0 1.57"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/007.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/007.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_2_2" type="fixed">
+    <parent link="link_2_1"/>
+    <child link="link_2_2"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.61" upper="2.61" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <link name="link_2_2">
+    <visual>
+      <origin xyz="-.84 0 1.1" rpy="-1.57 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/009.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/009.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_2_3" type="fixed">
+    <parent link="link_2_2"/>
+    <child link="link_2_3"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.61" upper="2.61" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <link name="link_2_3">
+    <visual>
+      <origin xyz="-.84 0 1.82" rpy="1.57 0 -1.57"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/011.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/011.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+    </inertial>
+  </link>
+
+   <joint name="joint_2_4" type="fixed">
+    <parent link="link_2_3"/>
+    <child link="link_2_4"/>
+     <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.61" upper="2.61" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <link name="link_2_4">
+    <visual>
+      <origin xyz="-1.36 0 2.24" rpy="0 3.14 -1.57"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/012.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/012.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <joint name="joint_3" type="revolute">
+    <parent link="link_2_3"/>
+    <child link="link_3"/>
+     <origin xyz="0 0 2.24" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-2.61" upper="2.61" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <link name="link_3">
+    <visual>
+      <origin xyz="-0.05 0 0" rpy="0 3.14 -1.57"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/014.stl" scale="0.01 0.01 0.01"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robo_description/meshes/014.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+    </inertial>
+  </link>
 
 </robot>
